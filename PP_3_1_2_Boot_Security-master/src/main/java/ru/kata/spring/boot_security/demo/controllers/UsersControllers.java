@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/users")
 public class UsersControllers {
@@ -20,9 +22,10 @@ public class UsersControllers {
     }
 
 
-    @GetMapping("/{id}")
-    public String showUserById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("index", usersServices.getUserById(id));
+    @GetMapping("")
+    public String showUserById(Principal principal, Model model) {
+
+        model.addAttribute("index", usersServices.loadUserByUsername(principal.getName()));
         return "index";
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admins")
 public class AdminControllers {
@@ -24,33 +26,39 @@ public class AdminControllers {
         return "users";
     }
 
+    @GetMapping("/{id}")
+    public String showUserById(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("index", usersServices.getUserById(id));
+        return "index";
+    }
+
     @GetMapping("/new")
-    public String createNewUserForm(Model model) {                  // по запросу "/new" в браузер вернется форма для создания нового юзера
+    public String createNewUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "new";                                         // возвращаем название Thymeleaf-шаблона, где у нас будет лежать форма для создания нового юзера
+        return "new";
     }
 
     @PostMapping()
     public String createNewUser(@ModelAttribute("user") User user){
         usersServices.addUser(user);
-        return "redirect:/users";                                // указываем адрес, на который мы хотим перенаправить пользоватея
+        return "redirect:/admins";
     }
 
     @GetMapping("/{id}/edit")
     public String editUsers(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", usersServices.getUserById(id));
-        return "/edit";
+        return "edit";
     }
 
     @PatchMapping("/{id}")
     public String updateUsers(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         usersServices.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/admins";
     }
 
     @DeleteMapping("/{id}/delete")
     public String deleteUsers(@PathVariable("id") Long id) {
         usersServices.removeUser(id);
-        return "redirect:/users";
+        return "redirect:/admins";
     }
 }

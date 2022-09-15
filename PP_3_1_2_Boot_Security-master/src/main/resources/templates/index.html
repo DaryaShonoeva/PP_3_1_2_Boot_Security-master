@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
@@ -20,9 +20,9 @@
         </tr>
         </tbody>
     </table>
-    <!--<a th:href="@{/users/{id}/edit(id=${index.getId()})}">edit</a>
-    <form th:method="DELETE" th:action="@{/users/{id}/delete(id=${index.getId()})}">
-        <input type="submit" value="delete"/>-->
+    <a th:href="@{/admins/{id}/edit(id=${index.getId()})}">edit</a>
+    <form th:method="DELETE" th:action="@{/admins/{id}/delete(id=${index.getId()})}">
+        <input type="submit" value="delete"/>
     </form>
 </div>
 

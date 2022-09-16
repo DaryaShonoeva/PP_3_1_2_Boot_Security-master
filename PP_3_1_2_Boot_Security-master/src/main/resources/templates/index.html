@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>index</title>
@@ -24,7 +24,11 @@
     <form th:method="DELETE" th:action="@{/admins/{id}/delete(id=${index.getId()})}">
         <input type="submit" value="delete"/>
     </form>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </div>
+
 
 </body>
 </html>

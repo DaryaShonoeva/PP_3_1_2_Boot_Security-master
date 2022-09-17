@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
         Set<Role> role = new LinkedHashSet<>();
         role.add(roleRepository.findAll().get(0));
@@ -35,16 +36,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
         userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void removeUser(Long id) {
         User user = userRepository.getOne(id);
         userRepository.delete(user);
